@@ -14,8 +14,9 @@ def getLFW(root: str = '.', batch_size: int = 100, shuffle: bool = False) -> Non
 
 def getMNIST(root: str = '.', batch_size: int = 100, shuffle: bool = False) -> None:
     transform = transforms.Compose([
+        transforms.Resize((64, 64)),
         transforms.ToTensor(),
-        transforms.Resize((64, 64))
+        transforms.Normalize(mean=0.5, std=0.5)
     ])
     train = data.MNIST(root=root, train=False, transform=transform, download=True)
     train_loader = DataLoader(train, batch_size, shuffle, drop_last=True)
